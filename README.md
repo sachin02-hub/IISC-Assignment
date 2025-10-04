@@ -123,6 +123,10 @@ The video, currently in the form of frames are fed into this SAM2 model and the 
 Output video of Multi-Object Segmentation:
 https://github.com/user-attachments/assets/c1fb490e-98b3-4e4e-bbf3-2fabcbc0ffe3
 
+Sample Frames After Segmentation:
+<img width="950" height="746" alt="image" src="https://github.com/user-attachments/assets/c6fd2b2b-ccbc-4abb-8fe2-026a6c6106ad" />
+
+
 #### Single Object
 A difference when the same approach is applied to Single Object Segmentation is that the mask generated will have to be reshaped before it is applied on the frames.
 A Mask is generally of the form (N,H,W) Where N is the number of objects. But in Single Object segmentation, N is 1, so the shape of the Mask by default changes to (H,W).
