@@ -24,23 +24,50 @@ The model architecture that delivered the best accuracy:
     
     num_classes=10,
     
-    embed_dim=192,
+    embed_dim=384,
     
-    depth=8,
+    depth=12,
     
-    num_heads=3,
+    num_heads=6,
     
     mlp_ratio=4.0,
     
-    drop_rate=0.1,
+    drop_rate=0,
     
-    attn_drop_rate=0.1,
+    attn_drop_rate=0,
     
-    drop_path_rate=0.05
+    drop_path_rate=0.1
 ```
 
-The Best Classification Accuracy obtained : 
+Training Parameters used:
+
+```
+    learning_rate = 3e-4,
+
+    batch_size = 128,
+
+    weight_decay = 0.05,
+
+    warmup_epochs = 10,
+
+    Epochs = (86)1000,
+
+    Patience = 10,
+
+    label_smoothing = 0.1
     
-#Q2.ipynb
+```
+
+Data Augmentation was applied.
+
+The forms of Augmentation includes : RandomCrop, HorizontalFlip, AutoAugment ( Cifar-10 Policy)
+
+The Best Classification Accuracy obtained : 89.05%
+
+The model was trained from scratch, with a Early Stopping Criterion of 10 epochs.
+
+The training ended by Early Stopping at 86 Epochs.
+    
+# Q2.ipynb
 I have removed the output of a cell in the notebook since it uses widget for selection (Video Masking with Manual Object Selection)
 Github does not support interactive widget display, so if the output was present, Github displays invalid notebook if u try to open q2.ipynb
