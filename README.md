@@ -96,7 +96,7 @@ Original Image vs Final Segmented Output
 <img width="1104" height="371" alt="image" src="https://github.com/user-attachments/assets/e6e253eb-60ee-4de5-9fb6-03e992d88024" />
 
 
-##Video Masking
+## Video Masking
 
 
 A Video has to be uploaded to the runtime of Colab.
@@ -106,7 +106,7 @@ The video is then split into corresponding frames whose resolution has been redu
 Sample Frame of the Video
 <img width="1297" height="678" alt="image" src="https://github.com/user-attachments/assets/88e5d9fc-e3ad-41f3-8de9-8c344b0e580d" />
 
-###Manual Object Selection using BBOXWidget in Jupyter (Colab)
+### Manual Object Selection using BBOXWidget in Jupyter (Colab)
 
 A Object Array will have to be defined manually similar to text prompts.
 
@@ -115,7 +115,7 @@ A widget will run, using which the user has to select points on the objects to b
 View of the Widget
 <img width="1374" height="797" alt="image" src="https://github.com/user-attachments/assets/a94b060a-83c4-4485-8ebe-9a493e64c1fc" />
 
-####Multi Objects
+#### Multi Objects
 The points selected in the widget is converted into forms accepted by SAM2 models and is added as the initial points to consider for segmentation.
 
 The video, currently in the form of frames are fed into this SAM2 model and the mask is propogated across the video.
@@ -123,7 +123,7 @@ The video, currently in the form of frames are fed into this SAM2 model and the 
 Output video of Multi-Object Segmentation:
 https://github.com/user-attachments/assets/c1fb490e-98b3-4e4e-bbf3-2fabcbc0ffe3
 
-####Single Objects
+#### Single Objects
 A difference when the same approach is applied to Single Object Segmentation is that the mask generated will have to be reshaped before it is applied on the frames.
 A Mask is generally of the form (N,H,W) Where N is the number of objects. But in Single Object segmentation, N is 1, so the shape of the Mask by default changes to (H,W).
 The Annotator expects a 3-D form of input, hence these masks will have to be reshaped to (1,H,W).
@@ -138,7 +138,7 @@ View of Widget with Single Object Selection
 Sample Frames After Segmentation:
 <img width="950" height="746" alt="image" src="https://github.com/user-attachments/assets/274cdb27-f9e6-4018-96ac-ad52667fde80" />
 
-###Automated Selection of Objects using Text Prompts with GroundingDino
+### Automated Selection of Objects using Text Prompts with GroundingDino
 
 Initial steps is similar to Image Segmentation using GroundingDino. After Convertion of bounding boxes into SAM2 format(xyxy), it is fed as input to a SAM2 model instead of points as seem in Manual Object Selection.
 
