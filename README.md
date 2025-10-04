@@ -68,7 +68,7 @@ The Best Classification Accuracy obtained : 89.05%
 The model was trained from scratch, with a Early Stopping Criterion of 10 epochs.
 The training ended by Early Stopping at 86 Epochs.
 
-##Analysis
+## Analysis
 
 Smaller patch sizes of 4 are required since the image dimensions are small (32×32). Larger patch sizes result in fewer patches available for training and each patch consisting of more features. A smaller patch size captures more localized features, which helps the model learn finer details. A patch size of 4 produces 64 patches per image, whereas a patch size of 8 yields only 16 patches, each containing more global features, as a result of which, localized features may be missed.
 
