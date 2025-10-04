@@ -144,7 +144,7 @@ Sample Frames After Segmentation:
 
 ### Automated Selection of Objects using Text Prompts with GroundingDino
 
-Initial steps is similar to Image Segmentation using GroundingDino. After Conversion of bounding boxes into SAM2 format(xyxy), it is fed as input to a SAM2 model instead of points as seem in Manual Object Selection.
+Initial steps are similar to Image Segmentation using GroundingDino. After Conversion of bounding boxes into SAM2 format(xyxy), it is fed as input to a SAM2 model instead of points as seem in Manual Object Selection.
 
 
 Video Frame Showing Object Selection by GroundingDino for text prompt: Dog
