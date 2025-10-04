@@ -59,15 +59,102 @@ Training Parameters used:
 ```
 
 Data Augmentation was applied.
-
 The forms of Augmentation includes : RandomCrop, HorizontalFlip, AutoAugment ( Cifar-10 Policy)
 
+```
 The Best Classification Accuracy obtained : 89.05%
+```
 
 The model was trained from scratch, with a Early Stopping Criterion of 10 epochs.
-
 The training ended by Early Stopping at 86 Epochs.
-    
+
+##Analysis
+
+Smaller patch sizes of 4 are required since the image dimensions are small (32×32). Larger patch sizes result in fewer patches available for training and each patch consisting of more features. A smaller patch size captures more localized features, which helps the model learn finer details. A patch size of 4 produces 64 patches per image, whereas a patch size of 8 yields only 16 patches, each containing more global features, as a result of which, localized features may be missed.
+
+Deeper models with wider embeddings have higher dimensionality and capacity, which can lead to overfitting. Therefore, reducing the depth and embedding dimension allows faster convergence and better generalization.
+
+Data augmentation improves the model’s robustness, similar to the effects of dropout and regularization.
+
+The AdamW optimizer, combined with a warmup and cosine learning rate scheduler, weight decay, and cross-entropy loss with label smoothing, provides more stable training, reduces divergence, and improves generalization.
+
+
 # Q2.ipynb
-I have removed the output of a cell in the notebook since it uses widget for selection (Video Masking with Manual Object Selection)
-Github does not support interactive widget display, so if the output was present, Github displays invalid notebook if u try to open q2.ipynb
+
+GroundingDINO and SAM2 was used to solve this question.
+
+Image has to be uploaded to the runtime of Colab for the notebook to work.
+
+The pipeline used for Object Segmentation using text prompts in an image is as follows:
+
+Install necessary packages -> import the libraries -> Load Image(Tensor) for GroundingDINO-> Apply Groundingdino model to the image with text prompt to obtain bounding boxes -> Convert the boxes into xyxy form for SAM2 image detection -> Load Image as RGB for SAM2 -> Apply SAM2 on the image with the converted box_xyxy -> Create a mask overlay it on the image to generate the final segmented output.
+
+Object Detected by GroundingDINO
+<img width="794" height="536" alt="image" src="https://github.com/user-attachments/assets/87ba2b82-200a-4280-a0e8-a6828ec9ed55" />
+
+Original Image vs Final Segmented Output
+<img width="1104" height="371" alt="image" src="https://github.com/user-attachments/assets/e6e253eb-60ee-4de5-9fb6-03e992d88024" />
+
+
+##Video Masking
+
+
+A Video has to be uploaded to the runtime of Colab.
+
+The video is then split into corresponding frames whose resolution has been reduced by 0.5 to manage VRAM usage.
+
+Sample Frame of the Video
+<img width="1297" height="678" alt="image" src="https://github.com/user-attachments/assets/88e5d9fc-e3ad-41f3-8de9-8c344b0e580d" />
+
+###Manual Object Selection using BBOXWidget in Jupyter (Colab)
+
+A Object Array will have to be defined manually similar to text prompts.
+
+A widget will run, using which the user has to select points on the objects to be segmented. It will work even with 1 point per object defined in the array.
+
+View of the Widget
+<img width="1374" height="797" alt="image" src="https://github.com/user-attachments/assets/a94b060a-83c4-4485-8ebe-9a493e64c1fc" />
+
+####Multi Objects
+The points selected in the widget is converted into forms accepted by SAM2 models and is added as the initial points to consider for segmentation.
+
+The video, currently in the form of frames are fed into this SAM2 model and the mask is propogated across the video.
+
+Output video of Multi-Object Segmentation:
+https://github.com/user-attachments/assets/c1fb490e-98b3-4e4e-bbf3-2fabcbc0ffe3
+
+####Single Objects
+A difference when the same approach is applied to Single Object Segmentation is that the mask generated will have to be reshaped before it is applied on the frames.
+A Mask is generally of the form (N,H,W) Where N is the number of objects. But in Single Object segmentation, N is 1, so the shape of the Mask by default changes to (H,W).
+The Annotator expects a 3-D form of input, hence these masks will have to be reshaped to (1,H,W).
+
+```python
+    masks = masks.reshape(1, masks.shape[0], masks.shape[1])
+```
+
+View of Widget with Single Object Selection
+<img width="1372" height="792" alt="image" src="https://github.com/user-attachments/assets/22ac8b12-a25e-4474-b394-8058ce923869" />
+
+Sample Frames After Segmentation:
+<img width="950" height="746" alt="image" src="https://github.com/user-attachments/assets/274cdb27-f9e6-4018-96ac-ad52667fde80" />
+
+###Automated Selection of Objects using Text Prompts with GroundingDino
+
+Initial steps is similar to Image Segmentation using GroundingDino. After Convertion of bounding boxes into SAM2 format(xyxy), it is fed as input to a SAM2 model instead of points as seem in Manual Object Selection.
+
+
+Video Frame Showing Object Selection by GroundingDino for text prompt: Dog
+<img width="794" height="428" alt="image" src="https://github.com/user-attachments/assets/2b690df9-51c7-4838-bbb0-ac7a1cad9904" />
+
+Same issue of Mask Reshaping will occur since the underlying logic behind video propogation is the same. Hence the same code snippet to reshapre the mask has to be applied here.
+
+
+Sample Frames After Segmentation:
+<img width="950" height="746" alt="image" src="https://github.com/user-attachments/assets/80f951c4-cc47-4cf3-af86-23faa7d2efdd" />
+
+
+
+Note:
+```
+I have removed the output of the cells using the BBOX widget in the notebook since Github does not support interactive widget display, so if the output was present, Github displays invalid notebook if u try to open q2.ipynb
+```
