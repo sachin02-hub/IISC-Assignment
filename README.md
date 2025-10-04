@@ -13,7 +13,7 @@ The ViT models achieve maximum accuracy with 2–4× less compute and strong tra
 ## Results
 There is no particular prerequisites to run this notebook in Colab.
 
-Click Run All button at the top will suffice.
+Clicking Run All button at the top will suffice.
 
 The model architecture that delivered the best accuracy:
 
@@ -108,22 +108,22 @@ Sample Frame of the Video
 
 ### Manual Object Selection using BBOXWidget in Jupyter (Colab)
 
-A Object Array will have to be defined manually similar to text prompts.
+An Object Array must be defined manually similar to text prompts.
 
 A widget will run, using which the user has to select points on the objects to be segmented. It will work even with 1 point per object defined in the array.
 
 View of the Widget
 <img width="1374" height="797" alt="image" src="https://github.com/user-attachments/assets/a94b060a-83c4-4485-8ebe-9a493e64c1fc" />
 
-#### Multi Objects
+#### Multiple Objects
 The points selected in the widget is converted into forms accepted by SAM2 models and is added as the initial points to consider for segmentation.
 
-The video, currently in the form of frames are fed into this SAM2 model and the mask is propogated across the video.
+The video, currently in the form of frames are fed into this SAM2 model and the mask is propagated across the video.
 
 Output video of Multi-Object Segmentation:
 https://github.com/user-attachments/assets/c1fb490e-98b3-4e4e-bbf3-2fabcbc0ffe3
 
-#### Single Objects
+#### Single Object
 A difference when the same approach is applied to Single Object Segmentation is that the mask generated will have to be reshaped before it is applied on the frames.
 A Mask is generally of the form (N,H,W) Where N is the number of objects. But in Single Object segmentation, N is 1, so the shape of the Mask by default changes to (H,W).
 The Annotator expects a 3-D form of input, hence these masks will have to be reshaped to (1,H,W).
@@ -140,13 +140,13 @@ Sample Frames After Segmentation:
 
 ### Automated Selection of Objects using Text Prompts with GroundingDino
 
-Initial steps is similar to Image Segmentation using GroundingDino. After Convertion of bounding boxes into SAM2 format(xyxy), it is fed as input to a SAM2 model instead of points as seem in Manual Object Selection.
+Initial steps is similar to Image Segmentation using GroundingDino. After Conversion of bounding boxes into SAM2 format(xyxy), it is fed as input to a SAM2 model instead of points as seem in Manual Object Selection.
 
 
 Video Frame Showing Object Selection by GroundingDino for text prompt: Dog
 <img width="794" height="428" alt="image" src="https://github.com/user-attachments/assets/2b690df9-51c7-4838-bbb0-ac7a1cad9904" />
 
-Same issue of Mask Reshaping will occur since the underlying logic behind video propogation is the same. Hence the same code snippet to reshapre the mask has to be applied here.
+Same issue of Mask Reshaping will occur since the underlying logic behind video propagation is the same. Hence the same code snippet to reshape the mask has to be applied here.
 
 
 Sample Frames After Segmentation:
@@ -156,5 +156,5 @@ Sample Frames After Segmentation:
 
 Note:
 ```
-I have removed the output of the cells using the BBOX widget in the notebook since Github does not support interactive widget display, so if the output was present, Github displays invalid notebook if u try to open q2.ipynb
+I have removed the output of the cells using the BBOX widget in the notebook since GitHub does not support interactive widget display, so if the output was present, GitHub displays invalid notebook if u try to open q2.ipynb
 ```
