@@ -121,10 +121,8 @@ The points selected in the widget is converted into forms accepted by SAM2 model
 The video, currently in the form of frames are fed into this SAM2 model and the mask is propagated across the video.
 
 Output video of Multi-Object Segmentation:
-https://github.com/user-attachments/assets/c1fb490e-98b3-4e4e-bbf3-2fabcbc0ffe3
 
-Sample Frames After Segmentation:
-<img width="950" height="746" alt="image" src="https://github.com/user-attachments/assets/c6fd2b2b-ccbc-4abb-8fe2-026a6c6106ad" />
+![multi_object_widget-result](https://github.com/user-attachments/assets/43124c87-5773-4be0-9329-f073b0653475)
 
 
 #### Single Object
@@ -139,7 +137,7 @@ The Annotator expects a 3-D form of input, hence these masks will have to be res
 View of Widget with Single Object Selection
 <img width="1372" height="792" alt="image" src="https://github.com/user-attachments/assets/22ac8b12-a25e-4474-b394-8058ce923869" />
 
-Sample Frames After Segmentation:
+Sample Frames from Video After Segmentation:
 <img width="950" height="746" alt="image" src="https://github.com/user-attachments/assets/274cdb27-f9e6-4018-96ac-ad52667fde80" />
 
 ### Automated Selection of Objects using Text Prompts with GroundingDino
@@ -153,7 +151,7 @@ Video Frame Showing Object Selection by GroundingDino for text prompt: Dog
 Same issue of Mask Reshaping will occur since the underlying logic behind video propagation is the same. Hence the same code snippet to reshape the mask has to be applied here.
 
 
-Sample Frames After Segmentation:
+Sample Frames from Video After Segmentation:
 <img width="950" height="746" alt="image" src="https://github.com/user-attachments/assets/80f951c4-cc47-4cf3-af86-23faa7d2efdd" />
 
 
